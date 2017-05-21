@@ -64,11 +64,9 @@
                             
                           </ul>
                         </li>
-                        <li><a href="categoria1.html">Categorías</a></li>
-                        <li><a href="noticia1.html">Noticia 1</a></li>
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="{{ route('register') }}">Registro</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -99,11 +97,12 @@
     </div>
     
     <!-- Añadimos el footer -->
-    <div class="footer">
-        <div class="contenedor">
+    <footer class="footer">
+      <div class="contenedor">
         <p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><img alt="Licencia de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />Este obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">licencia de Creative Commons Reconocimiento-NoComercial 4.0 Internacional</a>. | Alejandro Zorita</p>
         </div>
-    </div>
+    </footer>
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

@@ -17,4 +17,4 @@ Route::get('/', array('as' => 'index','uses' => 'HomeController@index'));
 Auth::routes();
 
 
-Route::get('/home', array('as' => 'index_admin','uses' => 'HomeController@index_admin'));
+Route::get('/home', array('as' => 'index_admin','uses' => 'AdminController@index_admin'));

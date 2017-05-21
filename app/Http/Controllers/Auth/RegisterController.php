@@ -7,6 +7,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+
+//Controller
+use App\Http\Controllers\CategoriasController;
+
 class RegisterController extends Controller
 {
     /*
@@ -34,9 +38,23 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(CategoriasController $categoriasController)
     {
         $this->middleware('guest');
+        $this->categoriasController = $categoriasController;
+    }
+
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {   
+        $datos_vista['categorias'] = $this->categoriasController->get_todas_categorias();
+
+        return view('auth.register',compact('datos_vista'));
     }
 
     /**
