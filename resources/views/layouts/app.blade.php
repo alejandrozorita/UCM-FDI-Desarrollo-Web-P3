@@ -55,6 +55,15 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         <li class="active"><a href="index.html">Home</a></li>
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorías <span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            @foreach ($datos_vista['categorias'] as $categoria)
+                                <li><a href="{!! route('ver_noticias_categoria',$categoria->slug) !!}">{!! $categoria->nombre !!}</a></li>
+                            @endforeach
+                            
+                          </ul>
+                        </li>
                         <li><a href="categoria1.html">Categorías</a></li>
                         <li><a href="noticia1.html">Noticia 1</a></li>
                         @if (Auth::guest())
