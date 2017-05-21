@@ -4,138 +4,85 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-8">
-            <img src="{{ asset('assets/img/slider1.jpg') }}" alt="slider-noticia">
+            <div class="titulo-secundario">Noticias Destacadas</div>
+
+            @if (count($datos_vista['noticias_destacadas']) > 0 )
+
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+
+                        @foreach ($datos_vista['noticias_destacadas'] as $destacada)
+                            <div class="item ">
+                                <img src="{!! $destacada->imagen !!}" alt="{!! $destacada->titulo !!}">
+                                <div class="carousel-caption">
+                                {!! $destacada->extracto !!}
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previa</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Siguiente</span>
+                    </a>
+                </div>
+
+            @endif
+
         </div>
         <div class="col-sm-4">
             <div class="titulo-secundario">Todas las categorías</div>
             <hr>
             <ul class="listado-noticias">
-                <li class="elemento-listado-noticias">
-                    <span class="contenedor-noticias">54</span>
-                    <a href="categoria2.html">Categoría 2</a>
-                </li>
-                <li class="elemento-listado-noticias">
-                    <span class="contenedor-noticias">53</span>
-                    <a href="categoria1.html">Categoría 1</a>
-                </li>
-                <li class="elemento-listado-noticias">
-                    <span class="contenedor-noticias">22</span>
-                    <a href="categoria2.html">Categoría 2</a>
-                </li>
-                <li class="elemento-listado-noticias">
-                    <span class="contenedor-noticias">86</span>
-                    <a href="categoria1.html">Categoría 1</a>
-                </li>
-                <li class="elemento-listado-noticias">
-                    <span class="contenedor-noticias">31</span>
-                    <a href="categoria2.html">Categoría 2</a>
-                </li>
+
+                @foreach ($datos_vista['categorias'] as $categoria)
+                    <li class="elemento-listado-noticias">
+                        <span class="contenedor-noticias">{!! $categoria->count() !!}</span>
+                        <a href="categoria2.html">{!! $categoria->nombre !!}</a>
+                    </li>
+                @endforeach
+                
             </ul>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="titulo-secundario">Últimas noticias</div>
-                <hr>
-            </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="titulo-secundario">Últimas noticias</div>
+            <hr>
         </div>
-        <div class="row">
-            <!-- Listamos cada imagen igual ya que ahora no tiene funcionalidad -->
+    </div>
+
+    <div class="row">
+
+        @foreach ($datos_vista['noticias'] as $noticia)
+        
             <div class="col-3">
                 <div class="caja-minuatura">
                   <img src="img/noticia.png" alt="imagen-noticia">
                   <div class="extracto-noticia">
-                    <h3>Título de la noticia</h3>
-                    <p>Extracto de la noticia. La puede leer a continuación.
-                    Extracto de la noticia. La puede leer a continuación</p>
-                    <a href="noticia1.html" class="boton boton-login">Leer</a>
+                    <h3>{!! $noticia->titulo !!}</h3>
+                    <p>{!! $noticia->extracto !!}</p>
+                    <a href="{!! route('leer_noticia', $noticia->slug) !!}" class="boton boton-login">Leer</a>
                   </div>
                 </div>
             </div>
-            <!-- Listamos cada imagen igual ya que ahora no tiene funcionalidad -->
-            <div class="col-3">
-                <div class="caja-minuatura">
-                  <img src="img/noticia.png" alt="imagen-noticia">
-                  <div class="extracto-noticia">
-                    <h3>Título de la noticia 3</h3>
-                    <p>Extracto de la noticia. La puede leer a continuación.
-                    Extracto de la noticia. La puede leer a continuación</p>
-                    <a href="noticia3.html" class="boton boton-login">Leer</a>
-                  </div>
-                </div>
-            </div>
-            <!-- Listamos cada imagen igual ya que ahora no tiene funcionalidad -->
-            <div class="col-3">
-                <div class="caja-minuatura">
-                  <img src="img/noticia.png" alt="imagen-noticia">
-                  <div class="extracto-noticia">
-                    <h3>Título de la noticia 2</h3>
-                    <p>Extracto de la noticia. La puede leer a continuación.
-                    Extracto de la noticia. La puede leer a continuación</p>
-                    <a href="noticia2.html" class="boton boton-login">Leer</a>
-                  </div>
-                </div>
-            </div>
-            <!-- Listamos cada imagen igual ya que ahora no tiene funcionalidad -->
-            <div class="col-3">
-                <div class="caja-minuatura">
-                  <img src="img/noticia.png" alt="imagen-noticia">
-                  <div class="extracto-noticia">
-                    <h3>Título de la noticia</h3>
-                    <p>Extracto de la noticia. La puede leer a continuación.
-                    Extracto de la noticia. La puede leer a continuación</p>
-                    <a href="noticia1.html" class="boton boton-login">Leer</a>
-                  </div>
-                </div>
-            </div>
-            <!-- Listamos cada imagen igual ya que ahora no tiene funcionalidad -->
-            <div class="col-3">
-                <div class="caja-minuatura">
-                  <img src="img/noticia.png" alt="imagen-noticia">
-                  <div class="extracto-noticia">
-                    <h3>Título de la noticia</h3>
-                    <p>Extracto de la noticia. La puede leer a continuación.
-                    Extracto de la noticia. La puede leer a continuación</p>
-                    <a href="noticia1.html" class="boton boton-login">Leer</a>
-                  </div>
-                </div>
-            </div>
-            <!-- Listamos cada imagen igual ya que ahora no tiene funcionalidad -->
-            <div class="col-3">
-                <div class="caja-minuatura">
-                  <img src="img/noticia.png" alt="imagen-noticia">
-                  <div class="extracto-noticia">
-                    <h3>Título de la noticia 2</h3>
-                    <p>Extracto de la noticia. La puede leer a continuación.
-                    Extracto de la noticia. La puede leer a continuación</p>
-                    <a href="noticia2.html" class="boton boton-login">Leer</a>
-                  </div>
-                </div>
-            </div>
-            <!-- Listamos cada imagen igual ya que ahora no tiene funcionalidad -->
-            <div class="col-3">
-                <div class="caja-minuatura">
-                  <img src="img/noticia.png" alt="imagen-noticia">
-                  <div class="extracto-noticia">
-                    <h3>Título de la noticia</h3>
-                    <p>Extracto de la noticia. La puede leer a continuación.
-                    Extracto de la noticia. La puede leer a continuación</p>
-                    <a href="noticia1.html" class="boton boton-login">Leer</a>
-                  </div>
-                </div>
-            </div>
-            <!-- Listamos cada imagen igual ya que ahora no tiene funcionalidad -->
-            <div class="col-3">
-                <div class="caja-minuatura">
-                  <img src="img/noticia.png" alt="imagen-noticia">
-                  <div class="extracto-noticia">
-                    <h3>Título de la noticia 3</h3>
-                    <p>Extracto de la noticia. La puede leer a continuación.
-                    Extracto de la noticia. La puede leer a continuación</p>
-                    <a href="noticia3.html" class="boton boton-login">Leer</a>
-                  </div>
-                </div>
-            </div>
-        </div>
+
+        @endforeach
     </div>
 </div>
 @endsection

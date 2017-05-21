@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+
+Route::get('/', array('as' => 'index','uses' => 'HomeController@index'));
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+
+Route::get('/home', array('as' => 'index_admin','uses' => 'HomeController@index_admin'));

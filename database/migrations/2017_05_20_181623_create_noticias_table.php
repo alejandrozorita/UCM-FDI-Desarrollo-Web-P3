@@ -16,11 +16,15 @@ class CreateNoticiasTable extends Migration
         Schema::create('noticias', function (Blueprint $table) {
             $table->increments('id');
             $table->string('titulo');
+            $table->string('slug')->unique();
             $table->string('extracto');
             $table->string('imagen');
             $table->text('contenido');
-            $table->foreign('categoria_id')->references('id')->on('categorias');
-            $table->timestamp('categoria_id')->nullable();
+            $table->text('publicada');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->timestamp('user_id')->nullable();
+            $table->foreign('noticia_id')->references('id')->on('noticias');
+            $table->timestamp('noticia_id')->nullable();
 
             $table->timestamps();
             

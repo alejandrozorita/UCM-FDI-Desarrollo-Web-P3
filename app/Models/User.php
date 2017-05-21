@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+
+    //Relacion 1:n entre autores y noticias
+    public function noticias()
+    {
+        return $this->hasMany('App\Models\Noticias','id','user_id');
+    }
+
+    
 }
