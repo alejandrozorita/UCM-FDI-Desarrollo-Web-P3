@@ -11,6 +11,8 @@
 
     <title>{{ config('app.name', 'Alejandro Zorita') }}</title>
 
+    <link href="{{ asset ('assets/css/dropInput.css')}}" rel="stylesheet" type="text/css"/>
+
     <!-- Styles -->
     <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
@@ -54,14 +56,13 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                        <li class="active"><a href="index.html">Home</a></li>
+                        <li class="active"><a href="{!! route('index') !!}">Home</a></li>
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorías <span class="caret"></span></a>
                           <ul class="dropdown-menu">
                             @foreach ($datos_vista['categorias'] as $categoria)
                                 <li><a href="{!! route('ver_noticias_categoria',$categoria->slug) !!}">{!! $categoria->nombre !!}</a></li>
                             @endforeach
-                            
                           </ul>
                         </li>
                         @if (Auth::guest())
@@ -73,7 +74,15 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
+                            
+                            
+
                                 <ul class="dropdown-menu" role="menu">
+                                    @if (es_administrador(Auth::user()))
+                                        <li><a href="{!! route('nuevo_autor') !!}">Nuevo Autor</a></li>
+                                        <li><a href="autor-editar.html">Editar Autor</a></li>
+                                        <li class="active"><a href="{!! route('index_admin') !!}">Home Admin</a></li>
+                                    @endif
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -102,8 +111,12 @@
         <p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><img alt="Licencia de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />Este obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">licencia de Creative Commons Reconocimiento-NoComercial 4.0 Internacional</a>. | Alejandro Zorita</p>
         </div>
     </footer>
+    
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('assets/js/dropInput.js') }}"></script>
+    <script src="{{ asset('assets/js/script.js') }}"></script>
 </body>
 </html>

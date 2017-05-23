@@ -14,7 +14,17 @@
 
 Route::get('/', array('as' => 'index','uses' => 'HomeController@index'));
 
+
+
+
+
+Route::group(array('prefix' => 'administrador'), function()
+{
+	Route::get('/', array('as' => 'index_admin','uses' => 'AdminController@index_admin'));
+	Route::get('/autor/nuevo', array('as' => 'nuevo_autor','uses' => 'AdminController@nuevo_autor'));
+});
+
+
 Auth::routes();
 
 
-Route::get('/home', array('as' => 'index_admin','uses' => 'AdminController@index_admin'));
