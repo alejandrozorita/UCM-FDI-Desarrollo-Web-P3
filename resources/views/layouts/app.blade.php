@@ -118,5 +118,27 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('assets/js/dropInput.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap-notify.min.js') }}"></script>
+
+
+    {{-- Script para ejecutar variables PHP --}}
+{{ dd($errors->any()) }}
+    @if (count($errors) > 0)
+
+        @foreach ($errors->all() as $error)
+            <script>
+                $.notify({
+                    // options
+                    message: 'Hello World' 
+                },{
+                    // settings
+                    type: 'danger'
+                });
+            </script>
+        @endforeach
+
+    @endif
+
+    
 </body>
 </html>

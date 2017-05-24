@@ -10,6 +10,9 @@ use App\Http\Controllers\NoticiasController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\AutoresController;
 
+//Models
+use App\Models\User;
+
 class AdminController extends Controller
 {
 
@@ -48,6 +51,9 @@ class AdminController extends Controller
 
 
 
+    /**
+     * Mostramos la vista para crear un nuevo autor
+     */
     public function nuevo_autor()
     {
         $datos_vista['noticias'] = $this->noticiasController->get_todas_noticias_publicadas();
@@ -58,4 +64,36 @@ class AdminController extends Controller
 
         return view('admin.autor.nuevo',compact('datos_vista'));
     }
+
+
+    public function create_autor(Request $request)
+    {
+        $validar = self::validar_autor($autor->all());
+
+        $autor = self::crear_autor($autor->all());
+
+        return redirect()->route('index_admin')->withErrors('Usuario Creado');
+    }
+
+
+
+
+    private function validar_autor($autor)
+    {
+        $this->validate($autor, [
+            'email' => 'required|unique:users|email|max:200',
+            'name' => 'required',
+            'password' => 'required',
+            'rol' => 'required',
+        ]);
+
+        
+    }
+
+
+    private function crear_autor($autor)
+    {
+        return User::Create([$autor]);
+    }
+    
 }

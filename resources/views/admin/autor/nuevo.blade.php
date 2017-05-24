@@ -16,12 +16,13 @@
 		<!-- Mostramos el autor con su imagen -->
 		<div class="col-5">
 			<form class="form-login">
+			{!! Form::open(array('route' => 'nuevo_autor_post','files' => true)) !!}
 				<div class="form-group">
 					<div class="caja-minuatura">
 						<!-- La imagen no levara file ya que se cambiara desde la propia imagen  -->
 						<input class="form-control" type="file" name="imagen-autor" id="imagen_nuevo_autor" class="drag_drop">
 				      	<div class="caja-autor">
-				        	<input type="text" name="nombre-autor" class="form-inputs" value="nombre-autor" placeholder="Nombre del autor">
+				        	<input type="text" name="nombre-autor" class="form-inputs" placeholder="Nombre del autor">
 				        	<a href="" class="boton boton-login">Crear Autor</a>
 				      	</div>
 				    </div>
