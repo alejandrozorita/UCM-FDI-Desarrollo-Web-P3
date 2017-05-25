@@ -21,8 +21,8 @@ Route::get('/', array('as' => 'index','uses' => 'HomeController@index'));
 Route::group(array('prefix' => 'administrador'), function()
 {
 	Route::get('/', array('as' => 'index_admin','uses' => 'AdminController@index_admin'));
+	
 	Route::get('/autor/nuevo', array('as' => 'nuevo_autor','uses' => 'AdminController@nuevo_autor'));
-
 	Route::post('/autor/nuevo', array('as' => 'nuevo_autor_post','uses' => 'AdminController@create_autor'));
 
 

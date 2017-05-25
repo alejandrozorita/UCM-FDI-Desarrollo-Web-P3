@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Validator;
 
 
 //Controllers
@@ -68,11 +69,16 @@ class AdminController extends Controller
 
     public function create_autor(Request $request)
     {
-        $validar = self::validar_autor($autor->all());
+        $validar = self::validar_autor($request->all());
 
-        $autor = self::crear_autor($autor->all());
+        if (!$validar[0]) {
+            
+            return redirect()->back()->withErrors($validar[1])->withInput();
+        }
 
-        return redirect()->route('index_admin')->withErrors('Usuario Creado');
+        $autor = self::crear_autor($request->all());
+
+        return redirect()->route('index_admin')->with('mensaje' ,'Usuario Creado');
     }
 
 
@@ -80,12 +86,17 @@ class AdminController extends Controller
 
     private function validar_autor($autor)
     {
-        $this->validate($autor, [
+        $validator = Validator::make($autor, [
             'email' => 'required|unique:users|email|max:200',
-            'name' => 'required',
-            'password' => 'required',
-            'rol' => 'required',
+            'name' => 'required|min:2',
+            'password' => 'required|confirmed|min:6'
         ]);
+
+        if ($validator->fails()) {
+            return [false,$validator];
+        }
+
+        return [true];
 
         
     }

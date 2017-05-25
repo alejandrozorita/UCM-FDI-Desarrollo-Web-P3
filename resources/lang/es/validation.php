@@ -103,6 +103,9 @@ return [
         'password' => [
             'min' => 'La :attribute debe contener más de :min caracteres',
         ],
+        'imagen-autor' => [
+            'dimensions' => 'La foto del autor no cumple con las medidas mínimas. 100px X 100px',
+        ],
     ],
 
     /*
