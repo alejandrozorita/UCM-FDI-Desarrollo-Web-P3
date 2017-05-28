@@ -118,7 +118,6 @@
     
 
 
-    <!-- Scripts -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="{{ asset('assets/js/dropInput.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
@@ -174,6 +173,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script>
         $('select').select2();
+
+        $('.carousel').carousel({
+          interval: 2000
+        })
     </script>
 
 </body>

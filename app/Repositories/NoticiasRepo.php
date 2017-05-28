@@ -60,11 +60,11 @@ class NoticiasRepo {
 
 		$noticias = self::get_todas_noticias();
 
-		if (count($noticias) > 0 ) {
+		if (count($noticias) > 3) {
 			return $noticias->random(3);
 		}
 		else{
-			return $noticias;
+			return $noticias->random($noticias->count());
 		}
 		
 	}

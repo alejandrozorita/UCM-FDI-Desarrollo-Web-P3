@@ -7,7 +7,7 @@
 
 		<!-- Noticias escritas por el autor -->
 		<div class="col-sm-12">
-			<div class="titulo-secundario">Mis noticias <a href="{!! route('noticia_nueva') !!}" class="boton boton float-right">Nueva noticia</a></div>
+			<div class="titulo-secundario">Mis noticias <a href="{!! route('noticia_nueva') !!}" class="boton boton pull-right">Nueva noticia</a></div>
 			<hr>
 		</div>
 		

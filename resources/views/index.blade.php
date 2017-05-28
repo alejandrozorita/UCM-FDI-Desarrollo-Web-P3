@@ -21,7 +21,7 @@
 
                         @foreach ($datos_vista['noticias_destacadas'] as $destacada)
                             <div class="item ">
-                                <img src="{!! $destacada->imagen !!}" alt="{!! $destacada->titulo !!}">
+                                <img src="{!! asset('noticias/'.$destacada->id.'/'.$destacada->imagen) !!}" alt="{!! $destacada->titulo !!}">
                                 <div class="carousel-caption">
                                 {!! $destacada->extracto !!}
                                 </div>
@@ -76,9 +76,9 @@
 
         @foreach ($datos_vista['noticias'] as $noticia)
         
-            <div class="col-3">
+            <div class="col-sm-3">
                 <div class="caja-minuatura">
-                  <img src="img/noticia.png" alt="imagen-noticia">
+                  <img src="{!! asset('noticias/'.$noticia->id.'/'.$noticia->imagen) !!}" alt="imagen-noticia">
                   <div class="extracto-noticia">
                     <h3>{!! $noticia->titulo !!}</h3>
                     <p>{!! $noticia->extracto !!}</p>

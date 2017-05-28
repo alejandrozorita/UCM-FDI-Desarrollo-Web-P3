@@ -14,7 +14,8 @@
 
 Route::get('/', array('as' => 'index','uses' => 'HomeController@index'));
 
-Route::get('/noticias/categoria/{categoria_slug}', array('as' => 'ver_noticias_categoria','uses' => 'NoticiasController@ver_noticias_categoria'));
+Route::get('/noticia/{noticia_slug}', array('as' => 'leer_noticia','uses' => 'HomeController@leer_noticia'));
+Route::get('/noticias/categoria/{categoria_slug}', array('as' => 'ver_noticias_categoria','uses' => 'HomeController@ver_noticias_categoria'));
 
 
 
