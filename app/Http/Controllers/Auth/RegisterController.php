@@ -44,7 +44,7 @@ class RegisterController extends Controller
     {
         //$this->middleware('guest');
         $this->categoriasController = $categoriasController;
-        $this->redirectTo = route('nuevo_autor');
+        $this->redirectTo = route('nuevo_autor','creado=1');
     }
 
 
@@ -72,7 +72,6 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'imagen-autor' => 'required|dimensions:min_width=100,min_height=100',
-            
             'password' => 'required|min:6|confirmed',
 
 
@@ -86,15 +85,41 @@ class RegisterController extends Controller
      * @return User
      */
     protected function create(array $data)
-    {dd($data['imagen-autor']);
-        return User::create([
+    {
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'imagen-autor' => $data['imagen-autor'],
             'password' => bcrypt($data['password']),
+            'imagen' => '',
             'rol' => 'autor',
         ]);
+
+        $user->imagen = self::autor_imagen($data['imagen-autor'], $user);
+
+        $user->save();
+
+        return $user;
     }
+
+
+    /**
+     * Método para actualizar imagen a cada autor
+     */
+    private function autor_imagen($imagen_autor, $user)
+    {
+
+        $nombre_imagen = $user->id . '.' .$imagen_autor->getClientOriginalExtension();
+
+        $imagen_autor->move(
+            base_path() . '/public/autores/perfil/'.$user->id.'/', $nombre_imagen
+        );
+
+        return $nombre_imagen;
+    }
+
+
+
 
     /**
      * Handle a registration request for the application.

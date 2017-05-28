@@ -78,7 +78,7 @@
 	                        </div>
 
 	                        <div class="form-group">
-	                            <label for="password-confirm" class="col-md-4 control-label">Confirma Contraseña</label>
+	                            <label for="password-confirm" class="col-md-12 control-label">Confirma Contraseña</label>
 
 	                            <div class="col-md-12">
 	                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>

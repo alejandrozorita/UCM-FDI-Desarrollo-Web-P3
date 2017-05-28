@@ -75,7 +75,6 @@
                                 <ul class="dropdown-menu" role="menu">
                                     @if (es_administrador(Auth::user()))
                                         <li><a href="{!! route('nuevo_autor') !!}">Nuevo Autor</a></li>
-                                        <li><a href="autor-editar.html">Editar Autor</a></li>
                                         <li class="active"><a href="{!! route('index_admin') !!}">Home Admin</a></li>
                                     @endif
                                     <li>
@@ -136,22 +135,21 @@
     @endif
 
 
-    @if (session('mensaje')) 
+    @if (isset($datos_vista['mensaje_success']))
 
         <script>
 
             $.notify({
                 // options
-                message: '{{ session('mensaje') }}'
+                message: '{!! $datos_vista['mensaje_success'] !!}'
             },{
                 // settings
-                type: 'danger'
+                type: 'success'
             });
 
         </script>
 
     @endif
-
     
 </body>
 </html>

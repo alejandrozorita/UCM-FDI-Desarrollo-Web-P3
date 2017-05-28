@@ -14,10 +14,10 @@
 			<!-- Mostramos el autor con su imagen -->
 			<div class="col-sm-3">
 				<div class="caja-minuatura">
-			      <img src="{!! $autor->imagen !!}" alt="imagen-noticia">
+			      <img src="{!! asset('autores/perfil/'.$autor->id.'/'.$autor->imagen)  !!}" alt="{!! $autor->name !!}">
 			      <div class="caja-autor">
 			        <h3>{!! $autor->name !!}</h3>
-			        <a href="" class="boton boton-alerta">Borrar usuario</a>
+			        <a href="{!! route('borrar_autor', $autor->id) !!}" class="boton boton-alerta" onclick="return confirm('¿Está seguro de borrar a {!! $autor->name !!}?. ¡¡¡Se borrarán sus noticias escritas!!!!')">Borrar usuario</a>
 			        <a href="autor-editar.html" class="boton boton-login">Editar</a>
 			      </div>
 			    </div>
@@ -27,8 +27,6 @@
 		<div class="col-sm-12">
 			{{ $datos_vista['autores']->links() }}
 		</div>
-		
-		
 
 
 

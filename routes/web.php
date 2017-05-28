@@ -25,6 +25,11 @@ Route::group(array('prefix' => 'administrador'), function()
 	Route::get('/autor/nuevo', array('as' => 'nuevo_autor','uses' => 'AdminController@nuevo_autor'));
 	Route::post('/autor/nuevo', array('as' => 'nuevo_autor_post','uses' => 'AdminController@create_autor'));
 
+	Route::get('/autor/editar/{autor_id}', array('as' => 'editar_autor','uses' => 'AdminController@editar_autor'));
+	Route::post('/autor/editar', array('as' => 'editar_autor_post','uses' => 'AdminController@editar_autor_post'));
+
+	Route::get('/autor/borrar/{autor_id}', array('as' => 'borrar_autor','uses' => 'AdminController@borrar_autor'));
+
 
 });
 

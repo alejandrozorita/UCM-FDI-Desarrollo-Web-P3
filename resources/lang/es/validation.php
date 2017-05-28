@@ -103,6 +103,9 @@ return [
         'password' => [
             'min' => 'La :attribute debe contener más de :min caracteres',
         ],
+        'email' => [
+            'unique' => 'El :attribute ya ha sido registrado.',
+        ],
         'imagen-autor' => [
             'dimensions' => 'La foto del autor no cumple con las medidas mínimas. 100px X 100px',
         ],
