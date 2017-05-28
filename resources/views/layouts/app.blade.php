@@ -16,6 +16,7 @@
     <!-- Styles -->
     <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
     <!-- Scripts -->
     <script>
@@ -74,8 +75,15 @@
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     @if (es_administrador(Auth::user()))
+
+                                        <li><a href="{!! route('index_admin') !!}">Home Admin</a></li>
                                         <li><a href="{!! route('nuevo_autor') !!}">Nuevo Autor</a></li>
-                                        <li class="active"><a href="{!! route('index_admin') !!}">Home Admin</a></li>
+                                        
+                                    @else
+
+                                        <li><a href="{!! route('index_autor') !!}">Home Autor</a></li>
+                                        <li><a href="{!! route('noticia_nueva') !!}">Nueva Noticia</a></li>
+                                    
                                     @endif
                                     <li>
                                         <a href="{{ route('logout') }}"
@@ -152,6 +160,21 @@
         </script>
 
     @endif
+    
+    <!-- Editor Textara -->
+    <script src="//cdn.ckeditor.com/4.7.0/basic/ckeditor.js"></script>
+    <script src="{{asset('assets/js/adapters-jquery.js')}}"></script>
+    <script type="text/javascript">
+      $( document ).ready( function() {
+          $('textarea').ckeditor();
+        });
+    </script>
+    
+    <!-- Select2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script>
+        $('select').select2();
+    </script>
 
 </body>
 </html>

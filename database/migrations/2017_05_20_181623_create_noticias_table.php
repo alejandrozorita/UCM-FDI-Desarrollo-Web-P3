@@ -20,12 +20,11 @@ class CreateNoticiasTable extends Migration
             $table->string('extracto');
             $table->string('imagen');
             $table->text('contenido');
-            $table->text('publicada');
+            $table->boolean('publicada')->default(1);
+            $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->timestamp('user_id')->nullable();
-            $table->foreign('noticia_id')->references('id')->on('noticias');
-            $table->timestamp('noticia_id')->nullable();
-
+            $table->integer('categoria_id')->unsigned();
+            $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->timestamps();
             
         });

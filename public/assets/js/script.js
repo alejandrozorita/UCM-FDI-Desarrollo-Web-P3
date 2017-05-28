@@ -1,4 +1,4 @@
 //Subir imagen autor
-$('#imagen_autor').ezdz();
+$('.drag_drop').ezdz();
 
 

@@ -7,7 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Noticias extends Model
 {
 	protected $table = 'noticias';
-    //
+    
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'titulo', 'extracto','contenido','publicada','user_id','categoria_id',
+    ];
 
 
     //Relación 1:1 entre noticias y categorias

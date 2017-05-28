@@ -73,7 +73,7 @@ class RegisterController extends Controller
         return Validator::make($request, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'imagen-autor' => 'required|dimensions:min_width=100,min_height=100',
+            'imagen_autor' => 'required|dimensions:min_width=100,min_height=100',
             'password' => 'required|min:6|confirmed',
         ]);
     }

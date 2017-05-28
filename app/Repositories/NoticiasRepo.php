@@ -42,13 +42,13 @@ class NoticiasRepo {
 	/**
 	 * Sacamos todas las noticias de un aturo dado
 	 */
-	public function get_noticias_autor($user_id = null)
+	public function get_todas_noticias_autor_paginado($user_id = null, $num = 10)
 	{
 		if (is_null($user_id)) {
 			return null;
 		}
 
-		return Noticias::where('user_id',$user_id)->get();;
+		return Noticias::where('user_id',$user_id)->paginate($num);
 	}
 
 

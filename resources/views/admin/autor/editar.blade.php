@@ -6,27 +6,27 @@
 
 		<!-- Administrador -->
 		<div class="col-sm-12">
-			<div class="titulo-secundario">Crear Autor</div>
+			<div class="titulo-secundario">Editar Autor</div>
 			<hr>
 		</div>
 
 		<div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Nuevo Autor ByteCode</div>
+                <div class="panel-heading">Editar Autor ByteCode</div>
                 <div class="panel-body">
                     {!! Form::open(array('route' => 'editar_autor_post','files' => true, 'class' => 'form-login')) !!}
 
                     {!! Form::hidden('user_id', $datos_vista['autor']->id) !!}
 						
 						<div class="col-sm-6">
-							<div class="form-group{{ $errors->has('imagen-autor') ? ' has-error' : '' }}">
+							<div class="form-group{{ $errors->has('imagen_autor') ? ' has-error' : '' }}">
 
 	                            <div class="col-md-12">
 	                               	<input class="drag_drop" type="file" name="imagen_autor" id="imagen_autor" data-value="{!! asset('autores/perfil/'.$datos_vista['autor']->id.'/'.$datos_vista['autor']->imagen) !!}" >
 
-	                                @if ($errors->has('imagen-autor'))
+	                                @if ($errors->has('imagen_autor'))
 	                                    <span class="help-block">
-	                                        <strong>{{ $errors->first('imagen-autor') }}</strong>
+	                                        <strong>{{ $errors->first('imagen_autor') }}</strong>
 	                                    </span>
 	                                @endif
 	                            </div>

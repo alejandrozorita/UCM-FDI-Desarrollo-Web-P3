@@ -26,7 +26,7 @@ class AdminController extends Controller
                                 AutoresController $autoresController)
     {
         $this->middleware('admin');
-        //$this->middleware('auth');
+        $this->middleware('auth');
         $this->noticiasController = $noticiasController;
         $this->categoriasController = $categoriasController;
         $this->autoresController = $autoresController;
@@ -39,8 +39,6 @@ class AdminController extends Controller
 	 */
     public function index_admin(Request $request)
     {
-        $datos_vista['noticias'] = $this->noticiasController->get_todas_noticias_publicadas();
-
         $datos_vista['noticias_destacadas'] = $this->noticiasController->get_noticias_destacadas();
 
         $datos_vista['categorias'] = $this->categoriasController->get_todas_categorias();
@@ -62,9 +60,6 @@ class AdminController extends Controller
      */
     public function nuevo_autor(Request $request)
     {
-        $datos_vista['noticias'] = $this->noticiasController->get_todas_noticias_publicadas();
-
-        $datos_vista['noticias_destacadas'] = $this->noticiasController->get_noticias_destacadas();
 
         $datos_vista['categorias'] = $this->categoriasController->get_todas_categorias();
 
@@ -88,10 +83,6 @@ class AdminController extends Controller
         if (!$datos_vista['autor']) {
             return redirect()->back()->withErrors('No se ha selecionado un autor válido');
         }
-
-        $datos_vista['noticias'] = $this->noticiasController->get_todas_noticias_publicadas();
-
-        $datos_vista['noticias_destacadas'] = $this->noticiasController->get_noticias_destacadas();
 
         $datos_vista['categorias'] = $this->categoriasController->get_todas_categorias();
 

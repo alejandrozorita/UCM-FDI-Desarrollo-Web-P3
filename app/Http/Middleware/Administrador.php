@@ -40,10 +40,15 @@ class Administrador
      */
     public function handle($request, Closure $next, ...$guards)
     {
-
-        if (!es_administrador(Auth::user())) {
+        if (Auth::check()) {
+            if (!es_administrador(Auth::user())) {
+                return redirect()->route('index_autor');
+            }
+        }
+        else{
             return redirect()->route('index')->withErrors('No tiene permisos para acceder a esta zona');
         }
+        
 
         return $next($request);
     }

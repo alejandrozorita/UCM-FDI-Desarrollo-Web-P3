@@ -17,14 +17,14 @@
                     {!! Form::open(array('route' => 'register','files' => true, 'class' => 'form-login')) !!}
 						
 						<div class="col-sm-6">
-							<div class="form-group{{ $errors->has('imagen-autor') ? ' has-error' : '' }}">
+							<div class="form-group{{ $errors->has('imagen_autor') ? ' has-error' : '' }}">
 
 	                            <div class="col-md-12">
-	                               	<input class="form-control" type="file" name="imagen_autor" id="imagen_autor" class="drag_drop" required="">
+	                               	<input class="form-control drag_drop" type="file" name="imagen_autor" id="imagen_autor" required="">
 
-	                                @if ($errors->has('imagen-autor'))
+	                                @if ($errors->has('imagen_autor'))
 	                                    <span class="help-block">
-	                                        <strong>{{ $errors->first('imagen-autor') }}</strong>
+	                                        <strong>{{ $errors->first('imagen_autor') }}</strong>
 	                                    </span>
 	                                @endif
 	                            </div>

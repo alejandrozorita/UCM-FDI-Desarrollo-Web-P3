@@ -51,8 +51,13 @@
 
                 @foreach ($datos_vista['categorias'] as $categoria)
                     <li class="elemento-listado-noticias">
-                        <span class="contenedor-noticias">{!! $categoria->count() !!}</span>
-                        <a href="categoria2.html">{!! $categoria->nombre !!}</a>
+                        @if ($categoria->noticia)
+                            <span class="contenedor-noticias">{!! $categoria->noticias->count() !!}</span>
+                        @else
+                            <span class="contenedor-noticias">0</span>
+                        @endif
+                        
+                        <a href="{!! route('ver_noticias_categoria',$categoria->slug) !!}" style="cursor: pointer;text-decoration: none;">{!! $categoria->nombre !!}</a>
                     </li>
                 @endforeach
                 

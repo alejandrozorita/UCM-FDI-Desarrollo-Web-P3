@@ -17,8 +17,8 @@ class CreateComentariosTable extends Migration
             $table->increments('id');
             $table->string('texto');
             $table->boolean('publicado');
+            $table->integer('noticia_id')->unsigned();
             $table->foreign('noticia_id')->references('id')->on('noticias');
-            $table->timestamp('noticia_id')->nullable();
             $table->timestamps();
         });
     }
