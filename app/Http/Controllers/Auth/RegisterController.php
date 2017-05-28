@@ -12,6 +12,7 @@ use Illuminate\Auth\Events\Registered;
 
 //Controller
 use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\AutoresController;
 
 class RegisterController extends Controller
 {
@@ -40,9 +41,10 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct(CategoriasController $categoriasController)
+    public function __construct(CategoriasController $categoriasController, AutoresController $autoresController)
     {
         //$this->middleware('guest');
+        $this->autoresController = $autoresController;
         $this->categoriasController = $categoriasController;
         $this->redirectTo = route('nuevo_autor','creado=1');
     }
@@ -68,13 +70,11 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        return Validator::make($request, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'imagen-autor' => 'required|dimensions:min_width=100,min_height=100',
             'password' => 'required|min:6|confirmed',
-
-
         ]);
     }
 
@@ -95,7 +95,7 @@ class RegisterController extends Controller
             'rol' => 'autor',
         ]);
 
-        $user->imagen = self::autor_imagen($data['imagen-autor'], $user);
+        $user->imagen = self::autor_imagen($data['imagen_autor'], $user);
 
         $user->save();
 
@@ -108,14 +108,7 @@ class RegisterController extends Controller
      */
     private function autor_imagen($imagen_autor, $user)
     {
-
-        $nombre_imagen = $user->id . '.' .$imagen_autor->getClientOriginalExtension();
-
-        $imagen_autor->move(
-            base_path() . '/public/autores/perfil/'.$user->id.'/', $nombre_imagen
-        );
-
-        return $nombre_imagen;
+        return $this->autoresController->actualizar_imagen($imagen_autor, $user);
     }
 
 

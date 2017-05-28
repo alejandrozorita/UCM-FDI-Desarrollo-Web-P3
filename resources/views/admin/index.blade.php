@@ -18,7 +18,7 @@
 			      <div class="caja-autor">
 			        <h3>{!! $autor->name !!}</h3>
 			        <a href="{!! route('borrar_autor', $autor->id) !!}" class="boton boton-alerta" onclick="return confirm('¿Está seguro de borrar a {!! $autor->name !!}?. ¡¡¡Se borrarán sus noticias escritas!!!!')">Borrar usuario</a>
-			        <a href="autor-editar.html" class="boton boton-login">Editar</a>
+			        <a href="{!! route('editar_autor', $autor->id) !!}" class="boton boton-login">Editar</a>
 			      </div>
 			    </div>
 			</div>

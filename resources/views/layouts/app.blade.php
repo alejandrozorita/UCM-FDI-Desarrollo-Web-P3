@@ -101,8 +101,10 @@
     
     <!-- Añadimos el footer -->
     <footer class="footer">
-      <div class="contenedor">
-        <p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><img alt="Licencia de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />Este obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">licencia de Creative Commons Reconocimiento-NoComercial 4.0 Internacional</a>. | Alejandro Zorita</p>
+        <div class="container">
+          <div class="col-sm-12">
+              <p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><img alt="Licencia de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />Este obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">licencia de Creative Commons Reconocimiento-NoComercial 4.0 Internacional</a>. | Alejandro Zorita</p>
+            </div>
         </div>
     </footer>
     
@@ -150,6 +152,6 @@
         </script>
 
     @endif
-    
+
 </body>
 </html>

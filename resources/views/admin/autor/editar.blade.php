@@ -14,13 +14,15 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Nuevo Autor ByteCode</div>
                 <div class="panel-body">
-                    {!! Form::open(array('route' => 'register','files' => true, 'class' => 'form-login')) !!}
+                    {!! Form::open(array('route' => 'editar_autor_post','files' => true, 'class' => 'form-login')) !!}
+
+                    {!! Form::hidden('user_id', $datos_vista['autor']->id) !!}
 						
 						<div class="col-sm-6">
 							<div class="form-group{{ $errors->has('imagen-autor') ? ' has-error' : '' }}">
 
 	                            <div class="col-md-12">
-	                               	<input class="form-control" type="file" name="imagen_autor" id="imagen_autor" class="drag_drop" required="">
+	                               	<input class="drag_drop" type="file" name="imagen_autor" id="imagen_autor" data-value="{!! asset('autores/perfil/'.$datos_vista['autor']->id.'/'.$datos_vista['autor']->imagen) !!}" >
 
 	                                @if ($errors->has('imagen-autor'))
 	                                    <span class="help-block">
@@ -37,7 +39,7 @@
 	                            <label for="name" class="col-md-12 control-label">Nombre</label>
 
 	                            <div class="col-md-12">
-	                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+	                                <input id="name" type="text" class="form-control" name="name" value="{!! $datos_vista['autor']->name !!}" required autofocus>
 
 	                                @if ($errors->has('name'))
 	                                    <span class="help-block">
@@ -53,7 +55,7 @@
 	                            <label for="email" class="col-md-12 control-label">E-Mail</label>
 
 	                            <div class="col-md-12">
-	                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+	                                <input id="email" type="email" class="form-control" name="email" value="{!! $datos_vista['autor']->email !!}" required>
 
 	                                @if ($errors->has('email'))
 	                                    <span class="help-block">
@@ -67,7 +69,7 @@
 	                            <label for="password" class="col-md-12 control-label">Contraseña</label>
 
 	                            <div class="col-md-12">
-	                                <input id="password" type="password" class="form-control" name="password" required>
+	                                <input id="password" type="password" value='' class="form-control" name="password" >
 
 	                                @if ($errors->has('password'))
 	                                    <span class="help-block">
@@ -81,7 +83,7 @@
 	                            <label for="password-confirm" class="col-md-12 control-label">Confirma Contraseña</label>
 
 	                            <div class="col-md-12">
-	                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+	                                <input id="password-confirm" value='' type="password" class="form-control" name="password_confirmation" >
 	                            </div>
 	                        </div>
 
@@ -101,6 +103,4 @@
 </div>
 
 
-@endsection<!-- Sección dedicada al cuerpo de la página -->
-
-
+@endsection

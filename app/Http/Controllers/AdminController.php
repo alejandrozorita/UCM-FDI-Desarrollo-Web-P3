@@ -83,19 +83,24 @@ class AdminController extends Controller
      */
     public function editar_autor(Request $request)
     {
-            
+        $datos_vista['autor'] = User::find($request->autor_id);
+
+        if (!$datos_vista['autor']) {
+            return redirect()->back()->withErrors('No se ha selecionado un autor válido');
+        }
+
         $datos_vista['noticias'] = $this->noticiasController->get_todas_noticias_publicadas();
 
         $datos_vista['noticias_destacadas'] = $this->noticiasController->get_noticias_destacadas();
 
         $datos_vista['categorias'] = $this->categoriasController->get_todas_categorias();
-        
+
         //Verificamos si la carga de la pagina es tras crear un autor para mostrar mensaje de creado ok
-        if (isset($request->creado)) {
-            $datos_vista['mensaje_success'] = 'Autor creado correctamente';
+        if (isset($request->editado)) {
+            $datos_vista['mensaje_success'] = 'Autor editado correctamente';
         }
 
-        return view('admin.autor.nuevo',compact('datos_vista'));
+        return view('admin.autor.editar',compact('datos_vista'));
     }
 
 
@@ -104,13 +109,33 @@ class AdminController extends Controller
      */
     public function editar_autor_post(Request $request)
     {
-        
-        //Verificamos si la carga de la pagina es tras crear un autor para mostrar mensaje de creado ok
-        if (isset($request->creado)) {
-            $datos_vista['mensaje_success'] = 'Autor creado correctamente';
+
+        //Validamos los datos del formulario
+        $validate = $this->autoresController->validar_update_autor($request->all());
+
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate->messages())->withInput();
         }
 
-        return view('admin.autor.nuevo',compact('datos_vista'));
+        //Buscamos al autor
+        $user = User::find($request->user_id);
+
+        if (!$user) {
+            return redirect()->back()->withErrors('No hemos encontrado al autor')->withInput();
+        }
+
+        //Guardamos los datos en el objeto user y los guardamos en BD
+        $user->name     = $request->name;
+        $user->email    = $request->email;
+        $user->save();
+
+        //En caso de haber subid una nueva imagen, la actualziamos
+        if ($request->imagen_autor) {
+            $user->imagen = $this->autoresController->actualizar_imagen($request->imagen_autor, $user);
+            $user->save();
+        }
+
+        return redirect()->route('editar_autor',[$request->user_id ,'editado=1']);
     }
 
 
@@ -131,8 +156,6 @@ class AdminController extends Controller
         }
 
         $autor->delete();
-
-        
 
         return redirect()->route('index_admin', 'borrado=1');
     }
