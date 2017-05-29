@@ -17,6 +17,8 @@ Route::get('/', array('as' => 'index','uses' => 'HomeController@index'));
 Route::get('/noticia/{noticia_slug}', array('as' => 'leer_noticia','uses' => 'HomeController@leer_noticia'));
 Route::get('/noticias/categoria/{categoria_slug}', array('as' => 'ver_noticias_categoria','uses' => 'HomeController@ver_noticias_categoria'));
 
+Route::post('/comentario/nuevo', array('as' => 'nuevo_comentario','uses' => 'ComentariosController@nuevo_comentario'));
+
 
 
 

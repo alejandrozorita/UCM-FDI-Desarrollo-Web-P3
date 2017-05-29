@@ -79,7 +79,7 @@ class NoticiasRepo {
 			return null;
 		}
 
-		return Noticias::where('slug',$slug)->first();
+		return Noticias::where('slug',$slug)->with('comentarios')->first();
 
 	}
 	

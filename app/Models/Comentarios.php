@@ -7,7 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Comentarios extends Model
 {
 	protected $table = 'comentarios';
-    //
+    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['texto'];
+
 
 	//Relación 1:1 comentarios que pertenecen a noticia
     public function noticia(){

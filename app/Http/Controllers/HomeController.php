@@ -58,6 +58,13 @@ class HomeController extends Controller
 
         $datos_vista['categorias'] = $this->categoriasController->get_todas_categorias();
 
+        //Verificamos si la carga de la pagina es tras crear un autor para mostrar mensaje de borrado ok
+        if (isset($request->comentario_creado)) {
+            $datos_vista['mensaje_success'] = 'Comentario publicado correctamente';
+        }
+
+        
+
         return view('noticias.noticia',compact('datos_vista'));
     }
 

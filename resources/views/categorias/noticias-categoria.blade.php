@@ -18,7 +18,7 @@
                     <!-- Pintamos las noticia de la categoría -->
                     <div class="noticia-categoria">
                         <div class="col-sm-3">
-                            <img src="{{ asset('noticias/'.$noticia->id.'/'.$noticia->imagen) }}" alt="">
+                            <a href="{!! route('leer_noticia',$noticia->slug) !!}"><img src="{{ asset('noticias/'.$noticia->id.'/'.$noticia->imagen) }}" alt=""></a>
                         </div>
                         <div class="col-sm-9">
                             <div class="sub-titulo"><a href="{!! route('leer_noticia',$noticia->slug) !!}">{!! $noticia->titulo !!}</a> </div>
