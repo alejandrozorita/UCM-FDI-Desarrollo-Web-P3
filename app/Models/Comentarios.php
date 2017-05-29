@@ -18,7 +18,7 @@ class Comentarios extends Model
 
 	//Relación 1:1 comentarios que pertenecen a noticia
     public function noticia(){
-        return $this->belongsTo('App\Models\Noticias','noticia_id','id');
+        return $this->belongsTo('App\Models\Noticias','noticia_id','id')->orderBy('created_at','DESC');;
     }
 
 }

@@ -13,7 +13,7 @@ class NoticiasRepo {
 	 */
 	public function get_todas_noticias_publicadas()
 	{
-		return Noticias::where('publicada',1)->get();
+		return Noticias::where('publicada',1)->orderBy('created_at','DESC')->get();
 	}
 
 
@@ -35,7 +35,7 @@ class NoticiasRepo {
 			return null;
 		}
 
-		return Noticias::where('user_id',$user_id)->where('publicada',1)->get();
+		return Noticias::where('user_id',$user_id)->where('publicada',1)->orderBy('created_at','DESC')->get();
 	}
 
 
@@ -48,7 +48,7 @@ class NoticiasRepo {
 			return null;
 		}
 
-		return Noticias::where('user_id',$user_id)->paginate($num);
+		return Noticias::where('user_id',$user_id)->orderBy('created_at','DESC')->paginate($num);
 	}
 
 
@@ -79,7 +79,7 @@ class NoticiasRepo {
 			return null;
 		}
 
-		return Noticias::where('slug',$slug)->with('comentarios')->first();
+		return Noticias::where('slug',$slug)->orderBy('created_at','DESC')->with('comentarios')->first();
 
 	}
 	

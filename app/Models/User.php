@@ -32,7 +32,7 @@ class User extends Authenticatable
     //Relacion 1:n entre autores y noticias
     public function noticias()
     {
-        return $this->hasMany('App\Models\Noticias','id','user_id');
+        return $this->hasMany('App\Models\Noticias','id','user_id')->orderBy('created_at','DESC');
     }
 
     

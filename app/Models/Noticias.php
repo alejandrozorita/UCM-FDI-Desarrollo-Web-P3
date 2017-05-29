@@ -27,7 +27,7 @@ class Noticias extends Model
     //Relacion 1:n entre noticias y comentarios
     public function comentarios()
     {
-        return $this->hasMany('App\Models\Comentarios','noticia_id','id');
+        return $this->hasMany('App\Models\Comentarios','noticia_id','id')->orderBy('created_at','DESC');
     }
 
     //Relación N:1 entre noticias y autor

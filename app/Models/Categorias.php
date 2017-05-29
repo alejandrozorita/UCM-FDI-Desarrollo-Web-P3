@@ -12,6 +12,6 @@ class Categorias extends Model
 
     //Relación 1:1 entre noticias y categorias
     public function noticias(){
-        return $this->hasMany('App\Models\Noticias', 'categoria_id', 'id');
+        return $this->hasMany('App\Models\Noticias', 'categoria_id', 'id')->orderBy('created_at','DESC');;
     }
 }
