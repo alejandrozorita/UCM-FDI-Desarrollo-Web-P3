@@ -181,7 +181,14 @@ a{
 }
 .listado-noticias-categoria img
 {
-	width: 100%;
+    width: 100%;
+    margin-bottom: 30px;
+    text-align: justify;
+}
+.listado-noticias-categoria
+{
+    margin-bottom: 30px;
+    text-align: justify;
 }
 .noticia-categoria {
 	clear: both;
@@ -189,6 +196,12 @@ a{
 
 .noticia-categoria .sub-titulo a{
 	font-weight: bold;
+}
+
+.caja-noticia
+{
+    margin-top: 20px;
+    text-align: justify
 }
 
 /**

@@ -10,6 +10,15 @@ class CategoriasRepo {
 
 	public function get_todas_categorias()
 	{
-		return Categorias::all();
+		return Categorias::with('noticias')->get();
+	}
+
+
+	/**
+	 * Sacamos la categoria por su slug con sus noticias
+	 */
+	public function get_categoria_slug_con_nociticas($slug)
+	{
+		return Categorias::where('slug',$slug)->with('noticias')->first();
 	}
 }

@@ -68,4 +68,20 @@ class NoticiasRepo {
 		}
 		
 	}
+
+
+	/**
+	 * Sacamos la noticia por Slug
+	 */
+	public function get_notcia_por_slug($slug = null)
+	{
+		if (is_null($slug)) {
+			return null;
+		}
+
+		return Noticias::where('slug',$slug)->first();
+
+	}
+	
+
 }

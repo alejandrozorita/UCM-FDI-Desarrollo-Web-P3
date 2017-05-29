@@ -221,5 +221,21 @@ class NoticiasController extends Controller
 
 
 
+    /**
+     * La noticia por slgu
+     */
+    public function get_notcia_por_slug($slug)
+    {
+        return $this->noticiasRepo->get_notcia_por_slug($slug);
+    }
+
+
+    /**
+     * Scamos las noticias de una categoria
+     */
+    public function get_notcias_por_categoria($slug)
+    {
+        return $this->categoriasRepo->get_notcias_por_categoria($slug);
+    }
     
 }

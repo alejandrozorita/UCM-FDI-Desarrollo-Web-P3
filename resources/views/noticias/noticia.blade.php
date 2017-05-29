@@ -3,14 +3,11 @@
 @section('contenido')
 <div class="container">
     <div class="row">
-        <div class="col-sm-8">
-            <img src="{{ asset('assets/img/slider1.jpg') }}" alt="slider-noticia">
-        </div>
         
         <div class="row">
             <!-- Título de la categoría -->
             <div class="col-sm-12">
-                <div class="titulo-secundario">Noticia 1</div>
+                <div class="titulo-secundario">{!! $datos_vista['noticia']->titulo !!}</div>
                 <hr>
             </div>
         </div>
@@ -18,41 +15,35 @@
         <div class="row">
             <!-- imagen de la noticia -->
             <div class="col-sm-8">
-                <img src="img/slider1.jpg" alt="imagen-noticia">
+                <img src="{!! asset('noticias/'.$datos_vista['noticia']->id.'/'.$datos_vista['noticia']->imagen) !!}" alt="imagen-noticia">
             </div>
 
             <!-- Seguimos mostrando las categorías para mejorar la navegación del usuario -->
             <div class="col-sm-4">
-                <div class="titulo-secundario">Todas las categorías</div>
-                <hr>
-                <ul class="listado-noticias">
-                  <li class="elemento-listado-noticias">
-                    <span class="contenedor-noticias">54</span>
-                    <a href="categoria2.html">Categoría 2</a>
-                  </li>
-                  <li class="elemento-listado-noticias">
-                    <span class="contenedor-noticias">53</span>
-                    <a href="categoria1.html">Categoría 1</a>
-                  </li>
-                  <li class="elemento-listado-noticias">
-                    <span class="contenedor-noticias">22</span>
-                    <a href="categoria2.html">Categoría 2</a>
-                  </li>
-                  <li class="elemento-listado-noticias">
-                    <span class="contenedor-noticias">86</span>
-                    <a href="categoria1.html">Categoría 1</a>
-                  </li>
-                  <li class="elemento-listado-noticias">
-                    <span class="contenedor-noticias">31</span>
-                    <a href="categoria2.html">Categoría 2</a>
-                  </li>
-                </ul>
+              <div class="titulo-secundario">Todas las categorías</div>
+              <hr>
+              <ul class="listado-noticias">
+
+                  @foreach ($datos_vista['categorias'] as $categoria)
+
+                      <li class="elemento-listado-noticias">
+                          @if ($categoria->noticias)
+                              <span class="contenedor-noticias">{!! $categoria->noticias->count() !!}</span>
+                          @else
+                              <span class="contenedor-noticias">0</span>
+                          @endif
+                          
+                          <a href="{!! route('ver_noticias_categoria',$categoria->slug) !!}" style="cursor: pointer;text-decoration: none;">{!! $categoria->nombre !!}</a>
+                      </li>
+                  @endforeach
+                  
+              </ul>
             </div>
         </div>
 
         <div class="row">
             <!-- Pintamos el contenido de la noticia -->
-            <div class="col-12">
+            <div class="col-sm-12 caja-noticia">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut hendrerit neque ut nisi rhoncus faucibus. Nullam eget nulla metus. Phasellus tristique, eros eu lobortis tincidunt, mauris tellus interdum urna, volutpat hendrerit quam purus sed arcu. Morbi lacinia tortor ac massa vulputate, in tempus nulla eleifend. Etiam et nisi elementum, suscipit nibh eget, vulputate lacus. Vivamus lobortis neque pellentesque mi elementum, at fermentum erat viverra. Pellentesque elementum elementum sagittis. Proin accumsan, purus at ultricies suscipit, augue nunc mollis metus, a mollis felis urna laoreet orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas molestie leo velit, id condimentum orci volutpat in. Nullam eget leo tincidunt, elementum sapien vitae, gravida lacus. Etiam at odio eget dolor interdum molestie eget vel mauris.</p>
 
                 <p>Mauris non commodo enim. Fusce rhoncus metus dolor, quis commodo nisl ullamcorper eget. In mollis ligula magna, facilisis suscipit mauris accumsan ut. Vestibulum in vulputate libero. Fusce sed ex justo. Sed eu turpis ut purus pretium mattis. Sed ullamcorper accumsan auctor. Praesent ultricies congue vehicula. Ut sagittis quam sodales neque sodales laoreet. Proin auctor enim nec tellus facilisis, ac fringilla urna aliquet.</p>
@@ -73,80 +64,81 @@
 
                 <p>Nunc et sapien dui. Vestibulum id dui sagittis, ultricies est eu, placerat odio. Nulla facilisi. Donec sit amet magna ornare, pellentesque nibh eu, semper sapien. Pellentesque condimentum augue scelerisque, molestie orci sit amet, laoreet risus. Nulla tortor odio, ultrices sed consequat vitae, porta sed purus. Curabitur ac velit a velit condimentum condimentum ut ut risus. Suspendisse a rutrum ligula. In commodo id orci vitae efficitur. Fusce laoreet lacinia urna, dignissim rutrum est pulvinar sit amet. Sed dapibus, justo a aliquam dignissim, risus justo porta urna, id maximus sem sem eu elit.</p>
             </div>
+          </div>
 
-            <div class="row">
-                <!-- Pintamos los comentarios de la noticia -->
-                <div class="col-sm-12">
-                    <div class="titulo-secundario">Comentarios</div>
-                    <hr>
+          <div class="row">
+              <!-- Pintamos los comentarios de la noticia -->
+              <div class="col-sm-12">
+                  <div class="titulo-secundario">Comentarios</div>
+                  <hr>
+              </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+                <div class="contenido-comentario">
+                  <div class="imagen-comentario">
+                    <!-- Enlace a la pagina de comentarios del usuario -->
+                    <a href="comentarios-usuario.html">
+                      <img class="" src="{!! asset('assets/img/user.png') !!}" alt="imagen-usuario">
+                    </a>
+                  </div>
+                  <div class="texto-comentario">
+                    <p class="nombre-comentario">Comentario usuario 1</p>
+                    <p>Me ha gustado mucho esta noticia</p>
+                    <p>Hace 3 minutos</p>
+                  </div>
+                </div>
+                <hr>
+            </div>
+            <div class="col-sm-12">
+                <div class="contenido-comentario">
+                  <div class="imagen-comentario">
+                    <!-- Enlace a la pagina de comentarios del usuario -->
+                    <a href="comentarios-usuario.html">
+                      <img class="" src="{!! asset('assets/img/user.png') !!}" alt="imagen-usuario">
+                    </a>
+                  </div>
+                  <div class="texto-comentario">
+                    <p class="nombre-comentario">Comentario usuario 2</p>
+                    <p>Me encanta esta noticia!!</p>
+                    <p>Hace 4 horas</p>
+                  </div>
+                </div>
+                <hr>
+            </div>
+            <div class="col-sm-12">
+                <div class="contenido-comentario">
+                  <div class="imagen-comentario">
+                    <!-- Enlace a la pagina de comentarios del usuario -->
+                    <a href="comentarios-usuario.html">
+                      <img class="" src="{!! asset('assets/img/user.png') !!}" alt="imagen-usuario">
+                    </a>
+                  </div>
+                  <div class="texto-comentario">
+                    <p class="nombre-comentario">Comentario usuario 3</p>
+                    <p>Me encanta esta noticia!!</p>
+                    <p>Ayer</p>
+                  </div>
+                </div>
+                <hr>
+            </div>
+            <div class="col-sm-12">
+                <div class="contenido-comentario">
+                  <div class="imagen-comentario">
+                    <!-- Enlace a la pagina de comentarios del usuario -->
+                    <a href="comentarios-usuario.html">
+                      <img class="" src="{!! asset('assets/img/user.png') !!}" alt="imagen-usuario">
+                    </a>
+                  </div>
+                  <div class="texto-comentario">
+                    <p class="nombre-comentario">Comentario usuario 4</p>
+                    <p>Me encanta esta noticia!!</p>
+                    <p>Hace 5 días</p>
+                  </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="contenido-comentario">
-                      <div class="imagen-comentario">
-                        <!-- Enlace a la pagina de comentarios del usuario -->
-                        <a href="comentarios-usuario.html">
-                          <img class="" src="img/user.png" alt="imagen-usuario">
-                        </a>
-                      </div>
-                      <div class="texto-comentario">
-                        <p class="nombre-comentario">Comentario usuario 1</p>
-                        <p>Me ha gustado mucho esta noticia</p>
-                        <p>Hace 3 minutos</p>
-                      </div>
-                    </div>
-                    <hr>
-                </div>
-                <div class="col-12">
-                    <div class="contenido-comentario">
-                      <div class="imagen-comentario">
-                        <!-- Enlace a la pagina de comentarios del usuario -->
-                        <a href="comentarios-usuario.html">
-                          <img class="" src="img/user.png" alt="imagen-usuario">
-                        </a>
-                      </div>
-                      <div class="texto-comentario">
-                        <p class="nombre-comentario">Comentario usuario 2</p>
-                        <p>Me encanta esta noticia!!</p>
-                        <p>Hace 4 horas</p>
-                      </div>
-                    </div>
-                    <hr>
-                </div>
-                <div class="col-12">
-                    <div class="contenido-comentario">
-                      <div class="imagen-comentario">
-                        <!-- Enlace a la pagina de comentarios del usuario -->
-                        <a href="comentarios-usuario.html">
-                          <img class="" src="img/user.png" alt="imagen-usuario">
-                        </a>
-                      </div>
-                      <div class="texto-comentario">
-                        <p class="nombre-comentario">Comentario usuario 3</p>
-                        <p>Me encanta esta noticia!!</p>
-                        <p>Ayer</p>
-                      </div>
-                    </div>
-                    <hr>
-                </div>
-                <div class="col-12">
-                    <div class="contenido-comentario">
-                      <div class="imagen-comentario">
-                        <!-- Enlace a la pagina de comentarios del usuario -->
-                        <a href="comentarios-usuario.html">
-                          <img class="" src="img/user.png" alt="imagen-usuario">
-                        </a>
-                      </div>
-                      <div class="texto-comentario">
-                        <p class="nombre-comentario">Comentario usuario 4</p>
-                        <p>Me encanta esta noticia!!</p>
-                        <p>Hace 5 días</p>
-                      </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
     </div>
 </div>

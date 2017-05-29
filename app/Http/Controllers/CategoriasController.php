@@ -24,4 +24,13 @@ class CategoriasController extends Controller
     {
     	return $this->categoriasRepo->get_todas_categorias();
     }
+
+
+    /**
+	 * Sacamos la categoria por su slug con sus noticias
+	 */
+	public function get_categoria_slug_con_nociticas($slug)
+	{
+		return $this->categoriasRepo->get_categoria_slug_con_nociticas($slug);
+	}
 }
