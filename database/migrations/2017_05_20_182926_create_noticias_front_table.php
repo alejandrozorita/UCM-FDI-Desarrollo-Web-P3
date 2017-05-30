@@ -15,8 +15,8 @@ class CreateNoticiasFrontTable extends Migration
     {
         Schema::create('noticias_front', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('noticia_id')->unsigned();
             $table->foreign('noticia_id')->references('id')->on('noticias');
-            $table->timestamp('noticia_id')->nullable();
             $table->timestamps();
         });
     }

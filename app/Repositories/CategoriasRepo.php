@@ -21,4 +21,13 @@ class CategoriasRepo {
 	{
 		return Categorias::where('slug',$slug)->with('noticias')->first();
 	}
+
+
+	/**
+     * Sacamos noticias paginadas para no desmontar el front
+     */
+    public function get_todas_categorias_paginadas($num = 5)
+    {
+        return Categorias::with('noticias')->paginate($num);
+    }
 }

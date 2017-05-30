@@ -70,7 +70,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($request, [
+        return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'imagen_autor' => 'required|dimensions:min_width=100,min_height=100',

@@ -15,7 +15,7 @@
     <div class="row">
         <!-- imagen de la noticia -->
         <div class="col-sm-8">
-            <img src="{!! asset('noticias/'.$datos_vista['noticia']->id.'/'.$datos_vista['noticia']->imagen) !!}" alt="imagen-noticia">
+            <img src="{!! asset('noticias/'.$datos_vista['noticia']->id.'/'.$datos_vista['noticia']->imagen) !!}" alt="imagen-noticia" width="100%">
         </div>
 
         <!-- Seguimos mostrando las categorías para mejorar la navegación del usuario -->

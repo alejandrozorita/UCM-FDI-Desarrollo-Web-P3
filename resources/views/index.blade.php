@@ -11,15 +11,25 @@
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                   <!-- Indicators -->
                   <ol class="carousel-indicators">
-                    @foreach ($datos_vista['noticias_destacadas'] as $destacada)
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    @foreach ($datos_vista['noticias_destacadas'] as $key => $destacada)
+                        @if ($key == 0)
+                            <li data-target="#carousel-example-generic" data-slide-to="{!! $key !!}" class="active"></li>
+                        @else
+                            <li data-target="#carousel-example-generic" data-slide-to="{!! $key !!}"></li>
+                        @endif
+                        
                     @endforeach
                   </ol>
 
                   <div class="carousel-inner" role="listbox">
 
-                        @foreach ($datos_vista['noticias_destacadas'] as $destacada)
-                            <div class="item active">
+                        @foreach ($datos_vista['noticias_destacadas'] as $key => $destacada)
+                            @if ($key == 0)
+                                <div class="item active">
+                            @else
+                                <div class="item">
+                            @endif
+                            
                                 <a href="{!! route('leer_noticia',$destacada->slug) !!}"><img src="{!! asset('noticias/'.$destacada->id.'/'.$destacada->imagen) !!}" alt="{!! $destacada->titulo !!}"></a>
                                 <div class="carousel-caption">
                                 {!! $destacada->extracto !!}
@@ -53,6 +63,9 @@
                 @endforeach
                 
             </ul>
+            <div class="col-sm-12">
+            {{ $datos_vista['categorias']->links() }}
+        </div>
         </div>
     </div>
 

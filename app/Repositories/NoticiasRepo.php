@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Noticias;
+use App\Models\NoticiasFront;
 
 use Auth;
 
@@ -53,14 +54,17 @@ class NoticiasRepo {
 
 
 	/**
-	 * Sacamos una noticia destacada, ahora de manera aleatoria
+	 * Scamos noticias aleatorias para el slider del front
 	 */
-	public function get_noticias_destacadas()
+	public function get_noticias_random()
 	{	
 
 		$noticias = self::get_todas_noticias();
 
-		if (count($noticias) > 3) {
+		if (count($noticias) < 1) {
+			return $noticias;
+		}
+		elseif (count($noticias) > 3) {
 			return $noticias->random(3);
 		}
 		else{
@@ -68,6 +72,37 @@ class NoticiasRepo {
 		}
 		
 	}
+
+
+
+	/**
+	 * Sacamos las noticias destacadas
+	 */
+	public function get_noticias_destacadas()
+	{
+		return NoticiasFront::with('noticia')->get();
+	}
+
+
+
+	/**
+	 * Sacamos las noticias que no estén en destacads para el listado
+	 */
+	public function get_noticias_no_destacadas($arr_noticias_destacadas)
+	{
+		return Noticias::whereNotIn('id',array_pluck($arr_noticias_destacadas, 'noticia_id'))->get();
+	}
+
+
+
+	/**
+     * Quitamos la noticia de destacada
+     */
+    public function quitar_noticia_destacada($noticia_id)
+    {   
+        return NoticiasFront::destroy($noticia_id);
+    }
+
 
 
 	/**

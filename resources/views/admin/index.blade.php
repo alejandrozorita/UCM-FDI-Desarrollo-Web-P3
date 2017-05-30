@@ -29,93 +29,61 @@
 			{{ $datos_vista['autores']->links() }}
 		</div>
 
+		<!-- Noticias -->
+		<div class="col-sm-12">
+			<div class="titulo-secundario">Gestione sus noticias destacadas </div>
+			<hr>
+		</div>
 
 
 		<!-- Noticias -->
-		<div class="col-sm-12">
-			<div class="titulo-secundario">Selector orden noticias </div>
+		<div class="col-sm-12 selector-noticias-destacadas">
+			{!! Form::open(['route' => 'establecer_orden_noticias']) !!}
+				<div class="col-sm-2">Seleccione noticia: </div>
+
+				<div class="col-sm-5">
+					<select name="noticia_destacada" id="select_noticia_destacada"  class="form-control" required="">
+						<option disabled="" selected=""></option>
+		            	@foreach ($datos_vista['noticias_no_destacadas'] as $noticia)
+		            		<option value="{!! $noticia->id !!}">{!! $noticia->titulo !!}</option>
+		            	@endforeach
+		            </select>
+		        </div>
+
+				<div class="col-sm-2">En la posición:</div>
+
+				<div class="col-sm-1">
+					<select name="posicion" id="select_posicion_destacada"  class="form-control" required="">
+	            		<option disabled="" selected=""></option>
+		            	@foreach ($datos_vista['posiciones_destacadas'] as $posicion)
+		            		<option value="{!! $posicion !!}">{!! $posicion !!}</option>
+		            	@endforeach
+		            </select>
+				</div>
+				
+				{!! Form::submit('Guardar', ['class' => 'btn btn btn-primary']) !!}
+			{!! Form::close() !!}
+
 			<hr>
 		</div>
 
 		<!-- Orden de la noticia -->
-		<!-- IMPORTANTE: NO PONGO BOTÓN DE SUBMIT YA QUE LA IDEA ES QUE SE HAGA EL SUBMIT POR AJAX-->
 		<div class="col-sm-3">
-			<div class="caja-minuatura">
-		      	<img src="img/noticia.png" alt="imagen-noticia">
-		      	<div class="extracto-noticia">
-			        <h3>Título de la noticia 1</h3>
-			        <p>Extracto de la noticia. La puede leer a continuación.
-			        Extracto de la noticia. La puede leer a continuación</p>
-			        <label>Seleccione su posisción</label>
-			        <select name="noticia_id">
-			        	<option value="posicion_id">1</option>
-			        	<option value="posicion_id" selected="">2</option>
-			        	<option value="posicion_id">3</option>
-			        	<option value="posicion_id">4</option>
-			        	<option value="posicion_id">5</option>
-			        </select>
+			@foreach ($datos_vista['noticias_destacadas'] as $destacada)
+				<div class="caja-minuatura">
+			      	<img src="{!! asset('noticias/'.$destacada->noticia->id.'/'.$destacada->noticia->imagen) !!}" alt="{!! $destacada->noticia->slug !!}">
+			      	<div class="extracto-noticia">
+				        <h3>{!! $destacada->noticia->titulo !!}</h3>
+				        <p>{!! $destacada->noticia->extracto !!}</p>
+				    </div>
+				    <a href="{!! route('quitar_noticia_destacada',$destacada->noticia->id) !!}" class="boton boton-alerta" title="">Quitar destacada</a>
 			    </div>
-		    </div>
-		</div>
-		<!-- Orden de la noticia -->
-		<div class="col-sm-3">
-			<div class="caja-minuatura">
-		      	<img src="img/noticia.png" alt="imagen-noticia">
-		      	<div class="extracto-noticia">
-			        <h3>Título de la noticia 2</h3>
-			        <p>Extracto de la noticia. La puede leer a continuación.
-			        Extracto de la noticia. La puede leer a continuación</p>
-			        <label>Seleccione su posisción</label>
-			        <select name="noticia_id">
-			        	<option value="posicion_id">1</option>
-			        	<option value="posicion_id">2</option>
-			        	<option value="posicion_id" selected="">3</option>
-			        	<option value="posicion_id">4</option>
-			        </select>
-		      	</div>
-		    </div>
-		</div>
-
-		<!-- Orden de la noticia -->
-		<div class="col-sm-3">
-			<div class="caja-minuatura">
-		      	<img src="img/noticia.png" alt="imagen-noticia">
-		      	<div class="extracto-noticia">
-			        <h3>Título de la noticia 3</h3>
-			        <p>Extracto de la noticia. La puede leer a continuación.
-			        Extracto de la noticia. La puede leer a continuación</p>
-			        <label>Seleccione su posisción</label>
-			        <select name="noticia_id">
-			        	<option value="posicion_id">1</option>
-			        	<option value="posicion_id">2</option>
-			        	<option value="posicion_id">3</option>
-			        	<option value="posicion_id" selected="">4</option>
-			        </select>
-		      	</div>
-		    </div>
-		</div>
-
-
-		<!-- Orden de la noticia -->
-		<div class="col-sm-3">
-			<div class="caja-minuatura">
-		      	<img src="img/noticia.png" alt="imagen-noticia">
-		      	<div class="extracto-noticia">
-			        <h3>Título de la noticia 4</h3>
-			        <p>Extracto de la noticia. La puede leer a continuación.
-			        Extracto de la noticia. La puede leer a continuación</p>
-			        <label>Seleccione su posisción</label>
-			        <select name="noticia_id">
-			        	<option value="posicion_id" selected="">1</option>
-			        	<option value="posicion_id">2</option>
-			        	<option value="posicion_id">3</option>
-			        	<option value="posicion_id">4</option>
-			        </select>
-		      	</div>
-		    </div>
+			@endforeach
 		</div>
 
     </div>
 </div>
 @endsection<!-- Sección dedicada al cuerpo de la página -->
+
+
 		

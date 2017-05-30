@@ -41,12 +41,21 @@ class AdminController extends Controller
     {
         $datos_vista['noticias_destacadas'] = $this->noticiasController->get_noticias_destacadas();
 
+        $datos_vista['noticias_no_destacadas'] = $this->noticiasController->get_noticias_no_destacadas($datos_vista['noticias_destacadas']->toArray());
+
+        $datos_vista['posiciones_destacadas'] = self::crear_array_posicion($datos_vista['noticias_destacadas']->count(),1);
+
         $datos_vista['categorias'] = $this->categoriasController->get_todas_categorias();
 
         $datos_vista['autores'] = $this->autoresController->get_todos_autores_paginado(5);
     
         //Verificamos si la carga de la pagina es tras crear un autor para mostrar mensaje de borrado ok
         if (isset($request->borrado)) {
+            $datos_vista['mensaje_success'] = 'Autor borrado correctamente';
+        }
+
+        //Verificamos si la carga de la pagina es tras crear un autor para mostrar mensaje de borrado ok
+        if (isset($request->borrada_destacada)) {
             $datos_vista['mensaje_success'] = 'Autor borrado correctamente';
         }
 
@@ -152,4 +161,18 @@ class AdminController extends Controller
     }
 
 
+    /**
+     * Creamos una array para seleccionar el indice de las noticas
+     */
+    private function crear_array_posicion($cantidad,$sumatorio)
+    {   
+
+        $bucle = $cantidad+$sumatorio;
+        $array = array();
+        for ($i=1; $i < ($bucle+1); $i++) {
+            $array[$i] = $i;
+        }
+
+        return $array;
+    }
 }

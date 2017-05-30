@@ -25,10 +25,6 @@ class NoticiasController extends Controller
     }
 
 
-
-
-
-
     public function nueva_noticia($request = null, $autor_id = null)
     {
 
@@ -185,6 +181,33 @@ class NoticiasController extends Controller
         return $nombre_imagen;
     }
 
+
+
+    /**
+     * Recibimos la peticón por POST y guardamos las imagenes como destacadas
+     * Una vez guardadas, devolvemos todas las noticias para mostrar
+     */
+    public function establecer_orden_noticias(Request $request)
+    {
+        dd($request->all()); 
+    }
+
+
+
+    /**
+     * Quitamos la noticia de destacada
+     */
+    public function quitar_noticia_destacada(Request $request)
+    {
+        $borrado = $this->noticiasRepo->quitar_noticia_destacada($request->noticia_id);
+
+        if ($borrado) {
+            return redirect()->route('home_admin','borrada_destacada=1');
+        }
+        return redirect()->back()->withErrors('No se ha podido borrar la noticia');
+    }
+
+
     /**
      * Devolvemos todas las noticias publicadas
      */
@@ -194,11 +217,29 @@ class NoticiasController extends Controller
     }
 
     /**
-     * Devolvemos la noticia destacada
+     * Devolvemos las noticias destacadas
      */
     public function get_noticias_destacadas()
     {
-    	return $this->noticiasRepo->get_noticias_destacadas();
+        return $this->noticiasRepo->get_noticias_destacadas();
+    }
+
+    /**
+     * Devolvemos noticias random
+     */
+    public function get_noticias_random()
+    {
+        return $this->noticiasRepo->get_noticias_random();
+    }
+
+
+
+    /**
+     * Sacamos las noticias no destacadas
+     */
+    public function get_noticias_no_destacadas($arr_noticias_destacadas)
+    {
+        return $this->noticiasRepo->get_noticias_no_destacadas($arr_noticias_destacadas);
     }
 
 

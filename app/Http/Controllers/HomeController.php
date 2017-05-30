@@ -36,9 +36,9 @@ class HomeController extends Controller
     {
         $datos_vista['noticias'] = $this->noticiasController->get_todas_noticias_publicadas();
 
-        $datos_vista['noticias_destacadas'] = $this->noticiasController->get_noticias_destacadas();
+        $datos_vista['noticias_destacadas'] = $this->noticiasController->get_noticias_random();
 
-        $datos_vista['categorias'] = $this->categoriasController->get_todas_categorias();
+        $datos_vista['categorias'] = $this->categoriasController->get_todas_categorias_paginadas(5);
 
         return view('index',compact('datos_vista'));
     }

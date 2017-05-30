@@ -37,6 +37,10 @@ Route::group(array('prefix' => 'administrador'), function()
 	Route::post('/autor/editar', array('as' => 'editar_autor_post','uses' => 'AdminController@editar_autor_post'));
 
 	Route::get('/autor/borrar/{autor_id}', array('as' => 'borrar_autor','uses' => 'AdminController@borrar_autor'));
+
+	Route::post('/establecer-orden-noticias', array('as' => 'establecer_orden_noticias','uses' => 'NoticiasController@establecer_orden_noticias'));
+	Route::get('/quitar-noticia-destacada/{noticia_id}', array('as' => 'quitar_noticia_destacada','uses' => 'NoticiasController@quitar_noticia_destacada'));
+	
 });
 
 

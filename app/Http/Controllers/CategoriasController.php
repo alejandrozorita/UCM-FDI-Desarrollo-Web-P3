@@ -27,6 +27,15 @@ class CategoriasController extends Controller
 
 
     /**
+     * Sacamos noticias paginadas para no desmontar el front
+     */
+    public function get_todas_categorias_paginadas($num)
+    {
+        return $this->categoriasRepo->get_todas_categorias_paginadas($num);
+    }
+
+
+    /**
 	 * Sacamos la categoria por su slug con sus noticias
 	 */
 	public function get_categoria_slug_con_nociticas($slug)
