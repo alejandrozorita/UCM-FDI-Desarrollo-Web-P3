@@ -55,8 +55,8 @@
 				<div class="col-sm-1">
 					<select name="posicion" id="select_posicion_destacada"  class="form-control" required="">
 	            		<option disabled="" selected=""></option>
-		            	@foreach ($datos_vista['posiciones_destacadas'] as $posicion)
-		            		<option value="{!! $posicion !!}">{!! $posicion !!}</option>
+		            	@foreach ($datos_vista['posiciones_destacadas'] as $key => $posicion)
+		            		<option value="{!! $key !!}">{!! $posicion !!}</option>
 		            	@endforeach
 		            </select>
 				</div>
@@ -68,18 +68,20 @@
 		</div>
 
 		<!-- Orden de la noticia -->
-		<div class="col-sm-3">
+		
 			@foreach ($datos_vista['noticias_destacadas'] as $destacada)
-				<div class="caja-minuatura">
-			      	<img src="{!! asset('noticias/'.$destacada->noticia->id.'/'.$destacada->noticia->imagen) !!}" alt="{!! $destacada->noticia->slug !!}">
-			      	<div class="extracto-noticia">
-				        <h3>{!! $destacada->noticia->titulo !!}</h3>
-				        <p>{!! $destacada->noticia->extracto !!}</p>
+				<div class="col-sm-3">
+					<div class="caja-minuatura">
+				      	<img src="{!! asset('noticias/'.$destacada->noticia->id.'/'.$destacada->noticia->imagen) !!}" alt="{!! $destacada->noticia->slug !!}">
+				      	<div class="extracto-noticia">
+					        <h3>{!! $destacada->noticia->titulo !!}</h3>
+					        <p>{!! $destacada->noticia->extracto !!}</p>
+					    </div>
+					    <a href="{!! route('quitar_noticia_destacada',$destacada->id) !!}" class="boton boton-alerta" title="">Quitar destacada</a>
 				    </div>
-				    <a href="{!! route('quitar_noticia_destacada',$destacada->noticia->id) !!}" class="boton boton-alerta" title="">Quitar destacada</a>
 			    </div>
 			@endforeach
-		</div>
+		
 
     </div>
 </div>

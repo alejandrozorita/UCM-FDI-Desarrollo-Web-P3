@@ -49,15 +49,7 @@ class AdminController extends Controller
 
         $datos_vista['autores'] = $this->autoresController->get_todos_autores_paginado(5);
     
-        //Verificamos si la carga de la pagina es tras crear un autor para mostrar mensaje de borrado ok
-        if (isset($request->borrado)) {
-            $datos_vista['mensaje_success'] = 'Autor borrado correctamente';
-        }
-
-        //Verificamos si la carga de la pagina es tras crear un autor para mostrar mensaje de borrado ok
-        if (isset($request->borrada_destacada)) {
-            $datos_vista['mensaje_success'] = 'Autor borrado correctamente';
-        }
+        $datos_vista['mensaje_success'] = self::generar_alertas($request);
 
         return view('admin.index',compact('datos_vista'));
     }
@@ -73,9 +65,7 @@ class AdminController extends Controller
         $datos_vista['categorias'] = $this->categoriasController->get_todas_categorias();
 
         //Verificamos si la carga de la pagina es tras crear un autor para mostrar mensaje de creado ok
-        if (isset($request->creado)) {
-            $datos_vista['mensaje_success'] = 'Autor creado correctamente';
-        }
+        $datos_vista['mensaje_success'] = self::generar_alertas($request);
 
         return view('admin.autor.nuevo',compact('datos_vista'));
     }
@@ -96,9 +86,8 @@ class AdminController extends Controller
         $datos_vista['categorias'] = $this->categoriasController->get_todas_categorias();
 
         //Verificamos si la carga de la pagina es tras crear un autor para mostrar mensaje de creado ok
-        if (isset($request->editado)) {
-            $datos_vista['mensaje_success'] = 'Autor editado correctamente';
-        }
+        $datos_vista['mensaje_success'] = self::generar_alertas($request);
+        
 
         return view('admin.autor.editar',compact('datos_vista'));
     }
@@ -169,10 +158,40 @@ class AdminController extends Controller
 
         $bucle = $cantidad+$sumatorio;
         $array = array();
-        for ($i=1; $i < ($bucle+1); $i++) {
-            $array[$i] = $i;
+        for ($i=0; $i < $bucle; $i++) {
+            $array[$i] = $i+1;
         }
 
         return $array;
+    }
+
+
+
+    /**
+     * Automatizamos los mensajes generale de la plataforma
+     */
+    private function generar_alertas($request)
+    {
+
+        if (isset($request->borrado)) {
+            $return = 'Autor borrado correctamente';
+        }
+        elseif (isset($request->borrada_destacada)) {
+            $return = 'Autor borrado correctamente';
+        }
+        elseif (isset($request->destacada_editara)) {
+            $return = 'Noticia Destacada editada correctamente';
+        }
+        elseif (isset($request->creado)) {
+            $return = 'Autor creado correctamente';
+        }
+        elseif (isset($request->editado)) {
+            $return = 'Autor editado correctamente';
+        }
+        else{
+            $return = null;
+        }
+
+        return $return;
     }
 }

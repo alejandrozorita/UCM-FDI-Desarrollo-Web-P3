@@ -105,6 +105,8 @@ return [
         ],
         'email' => [
             'unique' => 'El :attribute ya ha sido registrado.',
+            'email'  => 'El :attribute no es un correo válido',
+
         ],
         'imagen-autor' => [
             'dimensions' => 'La foto del autor no cumple con las medidas mínimas. 100px X 100px',

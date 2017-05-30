@@ -8,6 +8,7 @@ use Auth;
 //Model
 use App\Models\Noticias;
 use App\Models\User;
+use App\Models\NoticiasFront;
 
 //Repositories
 use App\Repositories\NoticiasRepo;
@@ -189,7 +190,27 @@ class NoticiasController extends Controller
      */
     public function establecer_orden_noticias(Request $request)
     {
-        dd($request->all()); 
+        
+        if (!isset($request->posicion) || !isset($request->noticia_destacada)) {
+            return redirect()->back()->withErrors('No se ha podido borrar la noticia');
+        }
+
+        $noticias_front = NoticiasFront::all();
+
+        //Si la posicion ya existe, la actualizams
+        if (isset($noticias_front[$request->posicion])) {
+            $noticia_front = $noticias_front[$request->posicion];
+            $noticia_front->noticia_id = $request->noticia_destacada;
+            $noticia_front->save();
+        }
+        //Si no existe, la creamos
+        else{
+            $noticia_front = New NoticiasFront;
+            $noticia_front->noticia_id = $request->noticia_destacada;
+            $noticia_front->save();
+        }
+
+        return redirect()->route('index_admin','destacada_editara=1');
     }
 
 
@@ -202,7 +223,7 @@ class NoticiasController extends Controller
         $borrado = $this->noticiasRepo->quitar_noticia_destacada($request->noticia_id);
 
         if ($borrado) {
-            return redirect()->route('home_admin','borrada_destacada=1');
+            return redirect()->route('index_admin','borrada_destacada=1');
         }
         return redirect()->back()->withErrors('No se ha podido borrar la noticia');
     }

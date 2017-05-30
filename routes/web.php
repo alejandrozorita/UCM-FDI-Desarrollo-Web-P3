@@ -34,7 +34,7 @@ Route::group(array('prefix' => 'administrador'), function()
 	Route::post('/autor/nuevo', array('as' => 'nuevo_autor_post','uses' => 'AdminController@create_autor'));
 
 	Route::get('/autor/editar/{autor_id}', array('as' => 'editar_autor','uses' => 'AdminController@editar_autor'));
-	Route::post('/autor/editar', array('as' => 'editar_autor_post','uses' => 'AdminController@editar_autor_post'));
+	Route::post('/autor/editar', array('as' => 'editar_autor_post','uses' => 'AutoresController@editar_autor_post'));
 
 	Route::get('/autor/borrar/{autor_id}', array('as' => 'borrar_autor','uses' => 'AdminController@borrar_autor'));
 
@@ -57,7 +57,7 @@ Route::group(array('prefix' => 'autor'), function()
 	Route::get('/noticia/borrar/{noticia_id}', array('as' => 'borrar_noticia','uses' => 'NoticiasController@borrar_noticia'));
 
 	Route::get('/mis-datos/editar', array('as' => '_mis_datos','uses' => 'AutoresController@editar_autor'));
-	Route::post('/mis-datos/editar', array('as' => 'editar_autor_post','uses' => 'AutoresController@editar_autor_post'));
+	Route::post('/mis-datos/editar', array('as' => 'editar_autor_post','uses' => 'AdminController@editar_autor_post'));
 });
 
 
