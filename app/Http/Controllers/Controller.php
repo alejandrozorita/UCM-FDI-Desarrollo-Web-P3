@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Http\Controllers\NoticiasController;
 use App\Http\Controllers\CategoriasController;
 
+use Cache;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -22,6 +23,7 @@ class Controller extends BaseController
      */
     public function __construct(NoticiasController $noticiasController, CategoriasController $categoriasController)
     {
+        Cache::flush();
         //$this->middleware('auth');
         $this->noticiasController = $noticiasController;
         $this->categoriasController = $categoriasController;

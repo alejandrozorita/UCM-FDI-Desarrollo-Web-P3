@@ -14,6 +14,8 @@ use App\Http\Controllers\AutoresController;
 //Models
 use App\Models\User;
 
+use Cache;
+
 class AdminController extends Controller
 {
 
@@ -24,7 +26,8 @@ class AdminController extends Controller
      */
     public function __construct(NoticiasController $noticiasController, CategoriasController $categoriasController,
                                 AutoresController $autoresController)
-    {
+    {   
+        Cache::flush();
         $this->middleware('admin');
         $this->middleware('auth');
         $this->noticiasController = $noticiasController;
@@ -124,7 +127,9 @@ class AdminController extends Controller
             $user->save();
         }
 
-        return redirect()->route('editar_autor',[$request->user_id ,'editado=1']);
+        Cache::flush();
+        
+        return redirect()->route('index_admin','editado=1');
     }
 
 

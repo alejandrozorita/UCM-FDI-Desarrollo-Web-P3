@@ -12,11 +12,14 @@ use App\Repositories\ComentariosRepo;
 use App\Models\Noticias;
 use App\Models\Comentarios;
 
+use Cache;
+
 class ComentariosController extends Controller
 {
     
 	public function __construct(ComentariosRepo $comentariosRepo)
-    {
+    {   
+        Cache::flush();
         //$this->middleware('auth');
         $this->comentariosRepo = $comentariosRepo;
     }

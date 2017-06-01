@@ -17,6 +17,7 @@ use App\Repositories\UserRepo;
 use App\Models\Noticias;
 
 use Auth;
+use Cache;
 
 class AutoresController extends Controller
 {
@@ -29,7 +30,8 @@ class AutoresController extends Controller
      */
     public function __construct(NoticiasController $noticiasController, CategoriasController $categoriasController,
                                 UserRepo $userRepo)
-    {
+    {   
+        Cache::flush();
         $this->middleware('auth');
         $this->noticiasController = $noticiasController;
         $this->categoriasController = $categoriasController;
@@ -177,7 +179,7 @@ class AutoresController extends Controller
         $nombre_imagen = $user->id . '.' .$imagen_autor->getClientOriginalExtension();
 
         $imagen_autor->move(
-            base_path() . '/public/autores/perfil/'.$user->id.'/', $nombre_imagen
+            base_path() . '/html/autores/perfil/'.$user->id.'/', $nombre_imagen
         );
 
         return $nombre_imagen;

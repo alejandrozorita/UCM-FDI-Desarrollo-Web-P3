@@ -14,6 +14,7 @@ use App\Models\NoticiasFront;
 use App\Repositories\NoticiasRepo;
 
 use Illuminate\Http\Request;
+use Cache;
 
 class NoticiasController extends Controller
 {
@@ -22,6 +23,7 @@ class NoticiasController extends Controller
      */
     public function __construct(NoticiasRepo $noticiasRepo)
     {
+        Cache::flush();
     	$this->noticiasRepo = $noticiasRepo;
     }
 
@@ -176,7 +178,7 @@ class NoticiasController extends Controller
         $nombre_imagen = $noticia->id . '.' .$imagen_noticia->getClientOriginalExtension();
 
         $imagen_noticia->move(
-            base_path() . '/public/noticias/'.$noticia->id.'/', $nombre_imagen
+            base_path() . '/html/noticias/'.$noticia->id.'/', $nombre_imagen
         );
 
         return $nombre_imagen;

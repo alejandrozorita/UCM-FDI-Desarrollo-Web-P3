@@ -9,8 +9,8 @@ use App\Http\Controllers\CategoriasController;
 //Models
 use App\Models\Noticias;
 
-
 use Illuminate\Http\Request;
+use Cache;
 
 class HomeController extends Controller
 {
@@ -20,7 +20,8 @@ class HomeController extends Controller
      * @return void
      */
     public function __construct(NoticiasController $noticiasController, CategoriasController $categoriasController)
-    {
+    {   
+        Cache::flush();
         //$this->middleware('auth');
         $this->noticiasController = $noticiasController;
         $this->categoriasController = $categoriasController;
@@ -34,6 +35,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $datos_vista['noticias'] = $this->noticiasController->get_todas_noticias_publicadas();
 
         $datos_vista['noticias_destacadas'] = $this->noticiasController->get_noticias_random();

@@ -10,10 +10,13 @@ use App\Repositories\CategoriasRepo;
 
 use Illuminate\Http\Request;
 
+use Cache;
+
 class CategoriasController extends Controller
 {
     public function __construct(CategoriasRepo $categoriasRepo)
     {
+        Cache::flush();
         //$this->middleware('auth');
         $this->categoriasRepo = $categoriasRepo;
     }
