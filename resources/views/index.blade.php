@@ -7,11 +7,11 @@
             <div class="titulo-secundario">Noticias Destacadas</div>
 
 
-            @if (count($datos_vista['noticias_destacadas']) > 0 )
+            @if (count($datos_vista['noticias_titular']) > 0 )
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                   <!-- Indicators -->
                   <ol class="carousel-indicators">
-                    @foreach ($datos_vista['noticias_destacadas'] as $key => $destacada)
+                    @foreach ($datos_vista['noticias_titular'] as $key => $destacada)
                         @if ($key == 0)
                             <li data-target="#carousel-example-generic" data-slide-to="{!! $key !!}" class="active"></li>
                         @else
@@ -23,7 +23,7 @@
 
                   <div class="carousel-inner" role="listbox">
 
-                        @foreach ($datos_vista['noticias_destacadas'] as $key => $destacada)
+                        @foreach ($datos_vista['noticias_titular'] as $key => $destacada)
                             @if ($key == 0)
                                 <div class="item active">
                             @else
@@ -78,15 +78,15 @@
 
     <div class="row">
 
-        @foreach ($datos_vista['noticias'] as $noticia)
+        @foreach ($datos_vista['noticias_destacadas'] as $destacada)
         
             <div class="col-sm-3">
                 <div class="caja-minuatura">
-                  <img src="{!! asset('noticias/'.$noticia->id.'/'.$noticia->imagen) !!}" alt="imagen-noticia">
+                  <img src="{!! asset('noticias/'.$destacada->noticia->id.'/'.$destacada->noticia->imagen) !!}" alt="{!! $destacada->noticia->slug !!}">
                   <div class="extracto-noticia">
-                    <h3>{!! $noticia->titulo !!}</h3>
-                    <p>{!! $noticia->extracto !!}</p>
-                    <a href="{!! route('leer_noticia', $noticia->slug) !!}" class="boton boton-login">Leer</a>
+                    <h3>{!! $destacada->noticia->titulo !!}</h3>
+                    <p>{!! $destacada->noticia->extracto !!}</p>
+                    <a href="{!! route('leer_noticia', $destacada->noticia->slug) !!}" class="boton boton-login">Leer</a>
                   </div>
                 </div>
             </div>
